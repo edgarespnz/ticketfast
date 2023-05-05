@@ -1,0 +1,2 @@
+# ticketfast
+Prueba técnica solucionática
