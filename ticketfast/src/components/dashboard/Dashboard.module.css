@@ -1,10 +1,60 @@
-.announcecontainer{
+.announcecontainer {
     padding-top: calc(100vh - 100%);
     padding: 0.5em;
     background-color: rgb(209, 208, 208);
 }
 
-.pagecontent{
-    
-    background-color: aqua;
+
+.pagecontent {
+    position: relative;
+    min-height: 85vh;
+    height: fit-content;
 }
+
+/*para dar efecto overlay*/
+.pagecontent::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/bosque.jpeg');
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+}
+
+.cardcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+  }
+  
+  .cardtext {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cardtext h2 {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .cardtext button {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: large;
+    font-weight: bold;
+    color:white;
+    border-radius: 0;
+    width: 70%;
+    
+  }
