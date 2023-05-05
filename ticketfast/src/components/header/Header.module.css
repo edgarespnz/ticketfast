@@ -1,0 +1,12 @@
+.main {
+    padding: 1.5em;
+    background-color: rgb(179, 199, 123);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.h1 {
+    color: white;
+}

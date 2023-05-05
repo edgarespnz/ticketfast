@@ -1,0 +1,10 @@
+.announcecontainer{
+    padding-top: calc(100vh - 100%);
+    padding: 0.5em;
+    background-color: rgb(209, 208, 208);
+}
+
+.pagecontent{
+    
+    background-color: aqua;
+}
