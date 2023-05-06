@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import LoginCSS from './Login.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
@@ -8,6 +8,9 @@ export default function SignIn() {
 
     const [username , setUsername] = useState()
     const [password, setPassword] = useState()
+    const [error, setError] = useState(null)
+    const [show, setShow] = useState(false)
+    
     const navigate = useNavigate();
     
     const handleUsernameChange=(e)=>{
@@ -18,18 +21,42 @@ export default function SignIn() {
         setPassword(e.target.value);
     }
 
-    const onLoginButtonClick=()=>{
-        navigate('/dashboard')
+    const createAlert=()=>{
+        return(<Alert variant='danger' show={show} onClose={()=>setShow(false)} dismissible>{error}</Alert>)
     }
+
+    const onLoginButtonClick = async (e) => {
+        e.preventDefault()
+        setError(null)
+        try {
+          const response = await fetch('http://localhost:3001/verify', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: username, password: password })
+          })
+          if (response.ok) {
+            navigate('/dashboard')
+          } else {
+            setError("usuario o contraseña incorrectos")
+            setShow(true)
+          }
+        } catch (err) {
+            setError(err.message)
+            setShow(true)
+        }
+      }
 
     return (
         <div className="main p-5 d-flex align-content-center justify-content-center" >
             <div className={LoginCSS.container}>
                 <div className={LoginCSS.subcontainer} >
+                {error !== null ? createAlert() : null}
                     <h1 className={LoginCSS.h1}>Bienvenido</h1>
                     <Form onSubmit={onLoginButtonClick}>
                         <Form.Group>
-                            <Form.Control className={LoginCSS.formgroup} type="text" placeholder='Usuario' onChange={handleUsernameChange}/>
+                            <Form.Control className={LoginCSS.formgroup} type="text" placeholder='Usuario (correo electrónico)' onChange={handleUsernameChange}/>
                         </Form.Group>
 
                         <Form.Group>
