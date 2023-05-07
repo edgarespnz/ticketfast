@@ -13,6 +13,7 @@ export default function Register() {
     const [password, setPassword] = useState("")
     const [showAlert, setShowAlert] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error , setError] = useState();
 
     const navigate = useNavigate();
 
@@ -23,9 +24,28 @@ export default function Register() {
     const handlePasswordChange = (e) => { setPassword(e.target.value) }
 
 
+    const isValidEmail = () => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      const verifyForm =()=>{
+        if(name === "" || lastname === "" || password === ""  ){
+            setError('Uno o varios de los campos está vacío')
+            setShowAlert(true)
+            return false
+        }
+        if(!isValidEmail(email)) {
+            setError('El correo electrónico no es válido')
+            return false
+        }
+        else{
+            return true;
+        }
+    }
+
     //register new user (post)
-    const addNewUser = async (name, last_name, email, password) => {
-        console.log(password)
+    const addNewUser =  async (name, last_name, email, password) => {
+       if(verifyForm() === true){
         try {
             setLoading(true)
             const response = await fetch(`${URL}/createUser`, {
@@ -44,14 +64,14 @@ export default function Register() {
             setLoading(false)
             console.error(err);
         }
-
+       }
     }
 
     return (
         <div className="main p-5 d-flex align-content-center justify-content-center" >
             <Container className={RegisterCSS.container}>
                 <Container className={RegisterCSS.subcontainer} >
-                    {<Alert variant='danger' show={showAlert} onClose={() => setShowAlert(false)} dismissible> Contraseñas diferentes! </Alert>}
+                    {<Alert variant='danger' show={showAlert} onClose={() => setShowAlert(false)} dismissible>{error}</Alert>}
                     <h1 className={RegisterCSS.h1}>Registro</h1>
                     <Form onSubmit={(e) => {
                         e.preventDefault(); // evita el envío automático del formulario y la recarga de la página
