@@ -1,38 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../header/Header'
 import DashboardCSS from './Dashboard.module.css'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Dashboard() {
 
-    const productos = [
-        {
-            "title": "Bosque Berlín",
-            "imageUrl": "https://www.conservamospornaturaleza.org/img/2013/03/refugio-2-1.jpg",
-            "price": 20
-        },
-        {
-            "title": "Kakiriuka",
-            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv6m3JFEDpBhibyMpT9-prd4kmLGpf5gyC3nZeZJZ8OL6_RcSakXIz4BHGGR67MdBUl4Q&usqp=CAU",
-            "price": 18
-        },
-        {
-            "title": "Sabaullo",
-            "imageUrl": "https://elcomercio.pe/resizer/WYC2UA9xrBCxnYqbzxjgkACqo_E=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/2EN6MYPMM5G45DHVPHN5MU44AQ.jpg",
-            "price": 22
-        }
-    ];
+    const [anpList , setAnpList] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user'));
+    const navigate = useNavigate()
 
-    const cardConstructor = (title, imageUrl, price) => {
+
+    //fetch de productos
+    const httpAnps = async () => {
+        const response = await fetch("http://localhost:3001/anp");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setAnpList(data);
+      };
+
+    useEffect(() => {
+        try {
+          httpAnps();
+        } catch (error) {
+          console.error(error);
+        }
+      }, []);
+
+      useEffect(()=>{
+        if(isLoggedIn === undefined){
+           navigate('/login')
+        }
+      },[])
+
+    const cardConstructor = (productId, name, image, price) => {
         return (
             <div className={DashboardCSS.cardcontainer}>
                 <Card className='p-3' style={{ width: '35rem', height: '30rem' }}>
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Img src={imageUrl} className={DashboardCSS.image} />
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Img src={image} className={DashboardCSS.image} />
                     <Card.Body>
                         <Card.Text className={DashboardCSS.cardtext}>
-                            <Button className={DashboardCSS.cardtext} variant='warning'>Comprar</Button>
-                            <h2>{price} PEN</h2>
+                            <Button className={DashboardCSS.cardtext} variant='warning' 
+                            onClick={()=>navigate(`/product/${productId}`)}>Comprar</Button>
+                            <h3>{price} PEN</h3>
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -50,10 +64,10 @@ export default function Dashboard() {
             <div className={DashboardCSS.pagecontent}>
                 <div className={DashboardCSS.contentoverlay}>
                     <Row>
-                        {productos.map((item) => {
+                        {anpList.length > 0 && anpList.map((item) => {
                             return (
                                 <Col>
-                                    {cardConstructor(item.title, item.imageUrl, item.price)}
+                                    {cardConstructor(item.id, item.name, item.image, item.price)}
                                 </Col>
                             );
                         })}
