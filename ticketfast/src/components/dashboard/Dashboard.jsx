@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../header/Header'
 import DashboardCSS from './Dashboard.module.css'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import URL from '../../enviroment';
 
@@ -9,7 +9,7 @@ import URL from '../../enviroment';
 export default function Dashboard() {
 
     const [anpList , setAnpList] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user'));
+    const isLoggedIn  = localStorage.getItem('user')
     const navigate = useNavigate()
 
 
@@ -35,7 +35,7 @@ export default function Dashboard() {
         if(isLoggedIn === undefined){
            navigate('/login')
         }
-      },[])
+      },[isLoggedIn,navigate])
 
     const cardConstructor = (productId, name, image, price) => {
         return (

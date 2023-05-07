@@ -11,7 +11,6 @@ export default function SignIn() {
     const [password, setPassword] = useState()
     const [error, setError] = useState(null)
     const [show, setShow] = useState(false)
-    const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
 
@@ -38,7 +37,6 @@ export default function SignIn() {
             })
             if (response.ok) {
                 const data = await response.json();
-                setUser(data)
                 localStorage.setItem('user', JSON.stringify(data));
                 navigate('/dashboard');
             } else {
@@ -54,10 +52,9 @@ export default function SignIn() {
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
-          setUser(storedUser);
           navigate('/dashboard');
         }
-      }, []);
+      }, [navigate]);
       
 
     return (

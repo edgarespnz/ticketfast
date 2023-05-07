@@ -11,8 +11,6 @@ export default function Order() {
     const user = JSON.parse(localStorage.getItem('user'));
     const cart = JSON.parse(localStorage.getItem('cart'))
     const navigate = useNavigate() 
-    const randomId = Math.floor(Math.random() * 90000) + 10000;
-
 
     const handleClickButton = async () => {
         setLoading(true)
@@ -57,7 +55,7 @@ export default function Order() {
         if (user === undefined) {
             navigate('/login')
         }
-    }, [])
+    }, [navigate, user])
 
 
     return (

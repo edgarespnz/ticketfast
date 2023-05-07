@@ -11,7 +11,7 @@ export default function Product() {
     const [product, setProduct] = useState({})
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1)
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user'));
+    const isLoggedIn = localStorage.getItem('user')
     const navigate = useNavigate()
 
     const getAnpById = async (id) => {
@@ -44,7 +44,7 @@ export default function Product() {
         if (isLoggedIn === undefined) {
             navigate('/login')
         }
-    }, [])
+    }, [isLoggedIn, navigate])
 
 
     return (
