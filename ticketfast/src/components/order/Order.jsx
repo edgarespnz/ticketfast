@@ -4,7 +4,7 @@ import ConfirmationCSS from '../confirmation/Confirmation.module.css'
 import Header from '../header/Header'
 import { Row, Col, Container, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-
+import URL from '../../enviroment'
 
 export default function Order() {
     const [loading, setLoading] = useState(false)
@@ -15,7 +15,6 @@ export default function Order() {
 
 
     const handleClickButton = async () => {
-
         setLoading(true)
         const email = user.body.user.email;
 
@@ -29,9 +28,8 @@ export default function Order() {
                 ticketCount: cart.quantity
             }
         };
-
         try {
-            const response = await fetch('http://localhost:3001/send-email', {
+            const response = await fetch(`${URL}/send-email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

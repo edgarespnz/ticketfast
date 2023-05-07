@@ -3,6 +3,7 @@ import Header from '../header/Header'
 import DashboardCSS from './Dashboard.module.css'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import URL from '../../enviroment';
 
 
 export default function Dashboard() {
@@ -14,7 +15,7 @@ export default function Dashboard() {
 
     //fetch de productos
     const httpAnps = async () => {
-        const response = await fetch("http://localhost:3001/anp");
+        const response = await fetch(`${URL}/anp`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

@@ -3,6 +3,7 @@ import { Alert, Button, Form, Container } from 'react-bootstrap'
 import RegisterCSS from './Register.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import URL from '../../enviroment';
 
 export default function Register() {
 
@@ -27,7 +28,7 @@ export default function Register() {
         console.log(password)
         try {
             setLoading(true)
-            const response = await fetch('http://localhost:3001/createUser', {
+            const response = await fetch(`${URL}/createUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

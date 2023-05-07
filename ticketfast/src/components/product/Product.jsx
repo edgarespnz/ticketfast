@@ -5,6 +5,7 @@ import Header from '../header/Header'
 import DashboardCSS from '../dashboard/Dashboard.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Row, Col, Container } from 'react-bootstrap'
+import URL from '../../enviroment'
 
 export default function Product() {
     const [product, setProduct] = useState({})
@@ -15,7 +16,7 @@ export default function Product() {
 
     const getAnpById = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3001/anp/${id}`);
+            const response = await fetch(`${URL}/anp/${id}`);
             const data = await response.json();
             setProduct(data)
         } catch (error) {

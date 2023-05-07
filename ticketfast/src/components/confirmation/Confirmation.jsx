@@ -4,6 +4,7 @@ import DashboardCSS from '../dashboard/Dashboard.module.css'
 import { Row, Col, Container, Button } from 'react-bootstrap'
 import ConfirmationCSS from './Confirmation.module.css'
 import { useNavigate } from 'react-router-dom'
+import URL from '../../enviroment'
 
 export default function Confirmation() {
 

@@ -3,6 +3,7 @@ import { Alert, Button, Form } from 'react-bootstrap'
 import LoginCSS from './Login.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect} from 'react';
+import URL from '../../enviroment';
 
 export default function SignIn() {
 
@@ -28,7 +29,7 @@ export default function SignIn() {
         e.preventDefault()
         setError(null)
         try {
-            const response = await fetch('http://localhost:3001/verify', {
+            const response = await fetch(`${URL}/verify`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
