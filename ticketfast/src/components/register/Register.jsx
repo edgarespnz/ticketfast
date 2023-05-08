@@ -96,14 +96,14 @@ export default function Register() {
                                 <Form.Control type="password" placeholder='Contraseña' onChange={handlePasswordChange} />
                             </Form.Group>
 
+                            <Form.Group className='p-2 text-center' as={Col} xs={12} md={12} lg={12} xl={12}>
+                                <Button className={RegisterCSS.button} size='lg' disabled={loading} type='submit'>Crear Cuenta</Button>
+                            </Form.Group>
                         </Form>
-                    </Row>
-                    <Row className="d-grid mb-3 p-5" >
-                        <Button className={RegisterCSS.button} size='lg' disabled={loading} type='submit'>Crear Cuenta</Button>
                     </Row>
 
                     <Row className='text-center' >
-                        <span style={{fontWeight: 'bolder', color: 'black'}}>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link> </span>
+                        <span style={{ fontWeight: 'bolder', color: 'black' }}>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link> </span>
                     </Row>
                 </Container>
             </Container>
