@@ -10,7 +10,7 @@ export default function Order() {
     const [loading, setLoading] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'));
     const cart = JSON.parse(localStorage.getItem('cart'))
-    const navigate = useNavigate() 
+    const navigate = useNavigate()
 
     const handleClickButton = async () => {
         setLoading(true)
@@ -66,46 +66,39 @@ export default function Order() {
             </div>
 
             <div className={ConfirmationCSS.pagecontent}>
-                <Container >
-                    <Row className="justify-content-md-center">
-                        <Col className='text-center p-5' md="auto" style={{ backgroundColor: 'white' }}>
-                            <div className='mb-3'>
-                                <h2>Gracias por tu compra <h2 style={{ color: 'green', textTransform: 'uppercase' }}>{user.body.user.name}!</h2></h2>
-                            </div>
-
-                            <div className='mb-3'>
-                                <h2>VERIFICA QUE TU ORDEN ES CORRECTA</h2>
-                            </div>
-
-                            <div className='d-flex align-items-center justify-content-center'>
-                                <h3 style={{ marginRight: '0.5rem' }}>Boleto para: </h3>
-                                <h3 style={{ color: 'green' }}>{cart.name}</h3>
-                            </div>
-
-                            <div className='d-flex align-items-center justify-content-center'>
-                                <h3 style={{ marginRight: '0.5rem' }}>Cantidad: </h3>
-                                <h3 style={{ color: 'green' }}>{cart.quantity}</h3>
-                            </div>
-
-                            <div className='d-flex align-items-center justify-content-center'>
-                                <h3 style={{ marginRight: '0.5rem' }}>Precio total: </h3>
-                                <h3 style={{ color: 'green' }}>{cart.price} PEN</h3>
-                            </div>
-
-                            <div className='mt-5'>
-                                <p style={{ fontStyle: 'oblique' }}>Da click en "Realizar la orden" para poder finalizar la compra , se enviará un correo con la orden</p>
-                            </div>
-                            <Row >
-                                <Col className='pt-5'>
-                                    <Button variant='light' onClick={() => handleGoBackButton()}>{"<<"} Volver </Button>
-                                </Col>
-                                <Col className='pt-5'>
-                                    <Button disabled={loading} variant='success' onClick={() => handleClickButton()}>Realizar la Orden {">>"}</Button>
-                                </Col>
-                            </Row>
-                        </Col>
+                <Container className='text-center p-5' style={{ backgroundColor: 'white' , maxWidth: '400px'}} >
+                    <Row >
+                        <h2 style={{ color: 'green', textTransform: 'uppercase' }}>Gracias {user.body.user.name}!</h2>
                     </Row>
 
+                    <Row>
+                        <h2>VERIFICA QUE TU ORDEN ES CORRECTA</h2>
+                    </Row>
+
+                    <Row >
+                        <h3 style={{ color: 'green' }}>Boleto para: {cart.name}</h3>
+                    </Row>
+
+                    <Row>
+                        <h3 style={{ color: 'green' }}>Cantidad: {cart.quantity}</h3>
+                    </Row>
+
+                    <Row>
+                        <h3 style={{ color: 'green' }}>Precio total:{cart.price} PEN</h3>
+                    </Row>
+
+                    <Row>
+                        <p style={{ fontStyle: 'oblique' }}>Da click en "Realizar la orden" para poder finalizar la compra , se enviará un correo con la orden</p>
+                    </Row>
+
+                    <Row>
+                        <Col  xs={5} sm={5} md={5} lg={5} xl={5}>
+                            <Button variant='light' onClick={() => handleGoBackButton()}>{"<<"} Volver </Button>
+                        </Col>
+                        <Col >
+                            <Button disabled={loading} variant='success' onClick={() => handleClickButton()}>Realizar la Orden {">>"}</Button>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         </div>

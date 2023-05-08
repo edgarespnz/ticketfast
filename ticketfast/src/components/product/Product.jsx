@@ -26,7 +26,7 @@ export default function Product() {
     }
 
     const handleSetOrder = () => {
-        localStorage.setItem("cart", JSON.stringify({ "id": product.id, "name": product.name, "quantity" : quantity,"price": (product.price) * quantity }));
+        localStorage.setItem("cart", JSON.stringify({ "id": product.id, "name": product.name, "quantity": quantity, "price": (product.price) * quantity }));
         navigate(`/order/${id}`);
     };
 
@@ -58,11 +58,11 @@ export default function Product() {
                 <div className={ProductCSS.overlay}></div>
                 <Container className={ProductCSS.productcontainer}>
                     <Row >
-                        <Col xs={10} md={10} lg={6}>
+                        <Col xs={12} sm={12} md={12} lg={6}>
                             <img className='p-3 ' src={product.image} alt="450x450px" style={{ width: '100%', height: '100%' }} />
                         </Col>
 
-                        <Col className='d-flex flex-column'>
+                        <Col xs={12} sm={12} md={12} lg={6} className='d-flex flex-column'>
                             <Row className="align-items-center my-4">
                                 <Col>
                                     <h1>{product.name}</h1>
@@ -91,7 +91,6 @@ export default function Product() {
                                     </Col>
                                 </Row>
                             </Row>
-
                             <Row>
                                 <Col className='d-flex align-items-center justify-content-end p-3'>
                                     <Button
@@ -104,7 +103,6 @@ export default function Product() {
                             </Row>
 
                         </Col>
-
                     </Row>
                 </Container>
             </div>

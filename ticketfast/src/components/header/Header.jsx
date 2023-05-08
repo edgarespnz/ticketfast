@@ -14,12 +14,12 @@ export default function Header() {
     return (
         <div className={HeaderCSS.main} style={{ alignSelf: 'end' }}>
             <Row>
-                <Col sm={8} md={10} lg={10} xs={8}>
+                <Col  xs={8} sm={10} md={10} lg={10} xl={10}>
                     <h1 className={HeaderCSS.h1}>
                         TICKET-FAST <i class="fa-solid fa-ticket" color='white'></i>
                     </h1>
                 </Col>
-                <Col>
+                <Col xs={4} sm={2} md={2} lg={2} xl={2}>
                     <Button variant='danger' size='lg' onClick={logout} >Logout</Button>
                 </Col>
             </Row>
