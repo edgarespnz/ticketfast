@@ -61,10 +61,13 @@ export default function Register() {
                 console.log("usuario creado")
                 navigate('/login')
                 return data;
+
             } catch (err) {
-                setLoading(false)
-                setError(err)
-                setShowAlert(true)
+                if (err.message === "Unexpected token 'E', \"Error creating user\" is not valid JSON") {
+                    setLoading(false)
+                    setError("Usuario en uso")
+                    setShowAlert(true)
+                }
             }
         }
     }
@@ -74,7 +77,7 @@ export default function Register() {
             <Container className={RegisterCSS.container}>
                 <Container className={RegisterCSS.subcontainer} >
                     <Row >
-                        {<Alert variant='danger' show={showAlert} onClose={() => setShowAlert(false)} dismissible>{error && error}</Alert>}
+                        {<Alert variant='danger' show={showAlert} onClose={() => setShowAlert(false)} dismissible>{error}</Alert>}
                         <h1 className={RegisterCSS.h1}>Registro</h1>
                     </Row>
                     <Row >

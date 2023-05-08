@@ -66,7 +66,7 @@ export default function Order() {
             </div>
 
             <div className={ConfirmationCSS.pagecontent}>
-                <Container className='text-center p-5' style={{ backgroundColor: 'white' , maxWidth: '400px'}} >
+                <Container className='text-center p-5' style={{ backgroundColor: 'white', maxWidth: '400px' }} >
                     <Row >
                         <h2 style={{ color: 'green', textTransform: 'uppercase' }}>Gracias {user.body.user.name}!</h2>
                     </Row>
@@ -92,7 +92,7 @@ export default function Order() {
                     </Row>
 
                     <Row>
-                        <Col  xs={5} sm={5} md={5} lg={5} xl={5}>
+                        <Col xs={5} sm={5} md={5} lg={5} xl={5}>
                             <Button variant='light' onClick={() => handleGoBackButton()}>{"<<"} Volver </Button>
                         </Col>
                         <Col >
